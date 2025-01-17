@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="250.css">
+</head>
+<body>
+    <h1>Payment Details</h1>
+    <form action="proccess.php" method="post">
+        <label for="cardNumber">Card Number:</label><br>
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter card number" required><br><br>
+
+        <label for="nickname">Nickname:</label><br>
+        <input type="text" id="nickname" name="nickname" placeholder="Enter nickname" required><br><br>
+
+        <label for="expiryDate">Expiration Date:</label><br>
+        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YYYY" required><br><br>
+
+        <label for="cvc">CVC:</label><br>
+        <input type="text" id="cvc" name="cvc" placeholder="Enter CVC" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

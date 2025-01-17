@@ -1,0 +1,29 @@
+nav {
+    background-color: aqua;
+    width: auto;
+    height: 200px;
+    overflow-x: hidden;
+}
+
+
+div {
+    width: auto;
+    height: 500px;
+    background-color: brown;
+    border-style: dashed;
+    border-radius: 2px;
+}
+
+footer {
+    background-color: aquamarine;
+    width: auto;
+    height: 300px;
+}
+.imgbox1{
+    display: flex;
+    height: 200px;
+    display: inline-block;
+    
+    vertical-align: middle;
+    padding-left: 15%;
+}
