@@ -1,0 +1,30 @@
+{
+    question: "",
+    image:null,
+    answers: [
+        " ",
+         " ",
+        " "
+    ],
+    correct: 2
+},
+{
+    question: "Prin termenul «depășire» se înțelege 2Prin termenul «cedează trecerea» se înţelege:",
+    image:null,
+    answers: [
+        " Imobilizarea vehiculului în scopul înlăturării obstacolului pe un anumit sector de drum..",
+        " Imobilizarea vehiculului în scopul determinării situaţiei reale de drum în care se află vehiculul la momentul respectiv..",
+        "  Obligaţia unui participant la trafic să se abţină de la mişcare dacă aceasta va impune alţi participanţi, care au prioritate, să modifice în mod brusc direcţia, viteza sau să oprească."
+    ],
+    correct: 2
+},
+{
+    question: "Câte părți carosabile are drumul pe care vă deplasaţi?",
+    image:"https://auto-test.online/static/custom/img/md/B/5.jpg?v=1721726931",
+    answers: [
+        "Patru",
+         "Doua",
+        "Una"
+    ],
+    correct: 2
+},

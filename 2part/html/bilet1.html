@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilet 1 - Întrebări</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylebilete.css">
+
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="../index.html" style="color: white; font-size: 20px; text-decoration: none;">Underground</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="bilete.html">Home</a></li>
+            <li><a href="../html/about.html">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="question-navigation" id="question-navigation">
+
+    </div>
+
+    <div class="question-container" id="question-container">
+        <div class="question-image" id="question-image"></div> <!-- Imaginea -->
+        <div class="question-content">
+            <div class="question-header" id="question-header"></div> <!-- Întrebarea -->
+            <div class="answers" id="answers"></div> <!-- Răspunsurile -->
+        </div>
+    </div>
+
+    <div class="navigation-buttons">
+        <button id="prev-btn" onclick="previousQuestion()" disabled>Înapoi</button>
+        <button id="next-btn" onclick="nextQuestion()">Înainte</button>
+    </div>
+
+    <script>
+        const TOTAL_QUESTIONS = 42;
+        const questions = [
+            {
+                question: "Prin termenul «depășire» se înțelege:",
+                image: null, // Imagine asociată întrebării
+                answers: [
+                    "Devansarea unuia sau câtorva vehicule, care se deplasează cu o viteză mai mică pe banda de circulație din dreapta.",
+                    "Devansarea unuia sau câtorva vehicule, care se deplasează cu o viteză mai mică pe banda de circulație din stânga.",
+                    "Devansarea unui vehicul în mers, în cazul în care se impune ieşirea de pe banda de circulaţie iniţială. Deplasarea vehiculelor pe o bandă a părții carosabile cu o viteză mai mare decât viteza vehiculelor de pe banda alăturată nu se consideră depăşire."
+                ],
+                correct: 2
+            },
+            // Adaugă alte întrebări aici
+            {
+                question: "Prin termenul «cedează trecerea» se înţelege:",
+                image: null,
+                answers: [
+                    "Imobilizarea vehiculului în scopul înlăturării obstacolului pe un anumit sector de drum..",
+                    "Imobilizarea vehiculului în scopul determinării situaţiei reale de drum în care se află vehiculul la momentul respectiv..",
+                    "Obligaţia unui participant la trafic să se abţină de la mişcare dacă aceasta va impune alţi participanţi, care au prioritate, să modifice în mod brusc direcţia, viteza sau să oprească."
+                ],
+                correct: 2
+            },
+            {
+                question: "Câte părți carosabile are drumul pe care vă deplasaţi?",
+                image: "https://auto-test.online/static/custom/img/md/B/5.jpg?v=1721726931",
+                answers: [
+                    "Patru",
+                    "Doua",
+                    "Una"
+                ],
+                correct: 2
+            },
+            {
+                question: "Prin termenul «bandă de circulaţie» se înţelege:",
+                image: null,
+                answers: [
+                    "Fâşia de teren, de regulă, plantată, care desparte drumul în două sau mai multe părți carosabile.",
+                    "Elementul drumului destinat circulaţiei pietonilor ce se află în imediata apropiere de partea carosabilă sau este separată de ea cu un gazon. ",
+                    "Spaţiul longitudinal al părții carosabile, delimitat sau nu prin marcaje rutiere, având o lăţime corespunzătoare pentru circulaţia cu uşurinţă a unui şir de vehicule, altele decât vehiculele care se deplasează pe două roţi."
+                ],
+                correct: 2
+            },
+            {
+                question: "Prin termenul «oprire voluntară» se înţelege:",
+                image: null,
+                answers: [
+                    "Imobilizarea vehiculului din cauza defecţiunilor tehnice, eventualului pericol legat de transportarea încărcăturii, starea conducătorului (pasagerului) sau a obstacolului de pe drum.",
+                    "Imobilizarea vehiculului pe drum pentru un motiv altul decât acela, de a îmbarca sau a debarca persoane, de a încărca sau a descărca bunuri, în cazul în care timpul necesar pentru aceasta nu este limitat.",
+                    "Imobilizarea vehiculului pe drum atât cât este necesar pentru a îmbarca sau a debarca persoane, ori a încărca sau a descărca bunuri, în timpul în care conducătorul rămâne în vehicul ori în apropierea acestuia, pentru a putea, la nevoie să-l deplaseze."
+                ],
+                correct: 2
+            },
+            {
+                question: "Orice participant la trafic care respectă Regulamentul circulaţiei rutiere este în drept să conteze pe faptul că:",
+                image: null,
+                answers: [
+                    "Persoana împuternicită cu reglementarea, îndrumarea şi controlul circulaţiei pe drumurile publice, îi va acorda prioritate în trecerea intersecţiei.",
+                    "Ceilalţi participanţi la trafic de asemenea execută cerinţele acestui Regulament.",
+                    "Executarea semnalului de avertizare prin semnalizatorul de direcţie îi acordă prioritate în trecere."
+                ],
+                correct: 1
+            },
+            {
+                question: "Prin termenul «staţionare» se înţelege:",
+                image: null,
+                answers: [
+                    "Imobilizarea vehiculului pe drum atât cât este necesar pentru a îmbarca sau a debarca persoane, ori a încărca sau a descărca bunuri, în timpul în care conducătorul rămâne în vehicul ori în apropierea acestuia, pentru a putea, la nevoie să-l deplaseze.",
+                    "Imobilizarea vehiculului pe drum pentru un motiv altul decât acela, de a îmbarca sau a debarca persoane, de a încărca sau a descărca bunuri, în cazul în care timpul necesar pentru aceasta nu este limitat.",
+                    "Imobilizarea vehiculului din cauza defecţiunilor tehnice, eventualului pericol legat de transportarea încărcăturii, starea conducătorului (pasagerului) sau a obstacolului de pe drum."
+                ],
+                correct: 1
+            },
+            {
+                question: "Prin termenul «teritoriu adiacent drumului» se înţelege:",
+                image: null,
+                answers: [
+                    " Ansamblul continuu de imobile, ale cărui intrări şi ieşiri sunt semnalizate prin indicatoarele rutiere «Intrare în localitate» şi «Ieşire din localitate».",
+                    " Teritoriul din imediata apropiere a drumului (curţi, locuri de parcare, staţii de aprovizionare cu combustibil, întreprinderi etc.).",
+                    " Zonă dintr-o localitate unde se aplică reguli speciale de circulaţie, având intrările şi ieşirile semnalizate prin indicatoarele «Zonă rezidenţială» şi «Sfârşitul zonei rezidenţiale»."
+                ],
+                correct: 1
+            },
+            {
+                question: "Participanţii la trafic sunt obligaţi să respecte:",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "Prin termenul «trecere la nivel cu calea ferată» se înţelege:",
+                image: "https://auto-test.online/static/custom/img/md/B/12.jpg?v=1721726931",
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "Câte părți carosabile are drumul pe care vă deplasaţi?",
+                image: "https://auto-test.online/static/custom/img/md/B/13.jpg?v=1721726931",
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+            {
+                question: "",
+                image: null,
+                answers: [
+                    " ",
+                    " ",
+                    " "
+                ],
+                correct: 2
+            },
+
+
+
+        ];
+
+        let currentQuestion = 0;
+        let questionStatus = Array(TOTAL_QUESTIONS).fill(null);
+
+        function loadQuestion(index) {
+            const question = questions[index];
+            const questionHeader = document.getElementById("question-header");
+            const answersContainer = document.getElementById("answers");
+            const questionImage = document.getElementById("question-image");
+
+            // Asigură-te că elementul există
+            if (questionImage) {
+                // Verifică dacă întrebarea are o imagine asociată
+                if (question.image) {
+                    questionImage.innerHTML = `<img src="${question.image}" alt="Imagine">`;
+                    questionImage.style.display = "block"; // Afișează containerul imaginii
+                } else {
+                    questionImage.style.display = "none"; // Ascunde containerul dacă nu există imagine
+                }
+            } else {
+                console.error("Elementul #question-image nu există în DOM.");
+            }
+
+
+            questionHeader.textContent = `${index + 1}. ${question.question}`;
+            answersContainer.innerHTML = "";
+
+            question.answers.forEach((answer, i) => {
+                const button = document.createElement("button");
+                button.textContent = `${i + 1}) ${answer}`;
+                button.onclick = () => checkAnswer(button, i === question.correct, index);
+                answersContainer.appendChild(button);
+            });
+
+            // Actualizăm butoanele Înainte/Înapoi
+            document.getElementById("prev-btn").disabled = index === 0;
+            document.getElementById("next-btn").disabled = index === TOTAL_QUESTIONS - 1;
+        }
+
+        function checkAnswer(button, isCorrect, questionIndex) {
+            if (questionStatus[questionIndex] !== null) return;
+
+            const buttons = document.querySelectorAll(".answers button");
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                button.classList.add("correct");
+                questionStatus[questionIndex] = true;
+            } else {
+                button.classList.add("incorrect");
+                questionStatus[questionIndex] = false;
+
+                buttons[questions[questionIndex].correct].classList.add("correct");
+            }
+
+            generateNavigation();
+            checkCompletion();
+        }
+
+        function generateNavigation() {
+            const navigation = document.getElementById("question-navigation");
+            navigation.innerHTML = "";
+
+            for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+                const box = document.createElement("div");
+                box.classList.add("question-box");
+                box.textContent = i + 1;
+
+                if (questionStatus[i] === true) box.classList.add("correct");
+                if (questionStatus[i] === false) box.classList.add("incorrect");
+
+                box.onclick = () => loadQuestion(i);
+                navigation.appendChild(box);
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion(currentQuestion);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < TOTAL_QUESTIONS - 1) {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            }
+        }
+
+        function checkCompletion() {
+            if (questionStatus.every(status => status === true)) {
+                alert("Felicitări! Ai completat toate întrebările corect!");
+            }
+        }
+
+        // Inițializăm prima întrebare și navigația
+        loadQuestion(currentQuestion);
+        generateNavigation();
+
+        window.onload = () => {
+            loadQuestion(currentQuestion);
+            generateNavigation();
+        };
+    </script>
+</body>
+
+</html>

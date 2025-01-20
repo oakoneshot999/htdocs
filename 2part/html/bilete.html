@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilete</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', sans-serif;
+            background-color: #000; /* Fundal negru */
+            color: white; /* Text alb */
+            padding: 20px;
+        }
+
+        .ticket-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .ticket {
+            display: inline-block;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .ticket:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid white;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00ffcc;
+        }
+
+        .streak {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .day-box {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            background-color: #ccc;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 40px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .day-box.active {
+            background-color: orange;
+        }
+
+        .day-box.missed {
+            background-color: red;
+        }
+
+        #reset-streak {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            background-color: transparent; /* Transparent */
+            border: none;
+            cursor: pointer;
+            opacity: 0.1; /* Aproape invizibil */
+            transition: opacity 0.3s;
+        }
+
+        #reset-streak:hover {
+            opacity: 0.5; /* Devine mai vizibil la hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="index.html" style="color: white; font-size: 20px; text-decoration: none;">Underground</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="html/about.html">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <h1 style="text-align: center; margin-top: 20px;">Bilete Examen</h1>
+    <div class="ticket-list">
+        <!-- Generate 24 tickets -->
+        <script>
+            for (let i = 1; i <= 24; i++) {
+                document.write(`<a href="bilet${i}.html" class="ticket">Bilet ${i}</a>`);
+            }
+        </script>
+    </div>
+
+    <div class="streak">
+        <h2>Seria Zilnică</h2>
+        <div id="streak-container"></div>
+    </div>
+
+    <!-- Butonul secret -->
+    <button id="reset-streak" title="Reset Streak"></button>
+
+    <script>
+        const MAX_DAYS = 7; // Maxim 7 zile afișate în serie
+        const streakContainer = document.getElementById('streak-container');
+
+        // Load streak data from localStorage
+        let streak = JSON.parse(localStorage.getItem('streak')) || {
+            lastCompleted: null,
+            seriesCount: 0,
+            days: []
+        };
+
+        const today = new Date().toDateString();
+
+        // Funcție pentru actualizarea UI-ului
+        function updateUI() {
+            streakContainer.innerHTML = ''; // Curățăm elementele existente
+            if (streak.days.length === 0) {
+                streakContainer.innerHTML = '<p>Nu există progres pentru seria zilnică.</p>';
+                return;
+            }
+
+            streak.days.forEach((day, index) => {
+                const box = document.createElement('div');
+                box.classList.add('day-box');
+                box.textContent = `Ziua ${index + 1}`;
+
+                if (day === today) {
+                    box.classList.add('active');
+                }
+
+                streakContainer.appendChild(box);
+            });
+        }
+
+        // Resetarea seriei
+        document.getElementById('reset-streak').addEventListener('click', () => {
+            if (confirm('Ești sigur că vrei să resetezi seria?')) {
+                streak = { lastCompleted: null, seriesCount: 0, days: [] }; // Resetăm variabilele
+                localStorage.setItem('streak', JSON.stringify(streak));
+                updateUI();
+            }
+        });
+
+        updateUI();
+    </script>
+</body>
+</html>
